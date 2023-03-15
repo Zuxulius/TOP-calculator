@@ -1,7 +1,3 @@
-/* 
-
-*/
-
 function add(a, b) {
 	return a + b
 }
@@ -16,14 +12,15 @@ function multiply(a, b) {
 
 function divide(a, b) {
 	if (b === 0) {
-	screen.style = "font-size: 1rem;"
-	return 'ERROR: DIVIDING BY 0 TEARS OPEN THE FABRIC OF SPACE-TIME'
+	return 'INFINITY'
 	} else return a / b
 }
 
 function operate(op, a, b) {
-	console.log(values[0], value)
-	screen.innerText = op(a, b)
+	let solve = op(a, b);
+	screen.innerText = solve;
+	values = [solve]
+	value = "";
 }
 
 function populate(event) {
@@ -32,17 +29,30 @@ function populate(event) {
 		value = "";
 		operator = event.target.innerText;
 		screen.innerText += event.target.innerText;
-	}
+		}
+	
 	if (event.target.classList.contains("displayable")) {
-		if (screen.innerText === "0") screen.innerText = "";
+		if (screen.innerText === "0" || screen.innerText === "INFINITY") {
+		screen.innerText = "";
+		value = "";
+		values = [];
+		}
 		value += event.target.innerText;
-		value = Number(value);
 		screen.innerText += event.target.innerText;
 		}
 	if (event.target.className === "equals") {
-		console.log(event.target);
+		value = Number(value);
 		if (operator === "/") {
 			operate(divide, values[0], value);
+		}
+		if (operator === "+") {
+			operate(add, values[0], value);
+		}
+		if (operator === "-") {
+			operate(subtract, values[0], value);
+		}
+		if (operator === "*") {
+			operate(multiply, values[0], value);
 		}
 	}
 	if (event.target.className === "clear") {
@@ -54,7 +64,7 @@ function populate(event) {
 
 
 
-let operator;
+let operator = false;
 let value = "";
 let values = [];
 screen = document.getElementsByClassName("screen-content")[0];
