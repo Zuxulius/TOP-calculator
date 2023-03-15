@@ -1,0 +1,37 @@
+body {
+	background-color: #e5e5f7;
+	opacity: 0.8;
+	background-image: radial-gradient(circle at center center, #c9d3e9, #ced9e5), repeating-radial-gradient(circle at center center, #c9d3e9, #c9d3e9, 10px, transparent 20px, transparent 10px);
+	background-blend-mode: multiply;
+}
+
+.calculator {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-row {
+	background-color: lightgrey;
+}
+
+.screen {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	font-size: 2rem;
+	width: 100%;
+	height: 5vh;
+}
+
+.screen-content {
+	margin-right: 1vh;
+}
+
+button {
+	width: 10vw;
+	height: 5vh;
+}
+
