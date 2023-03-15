@@ -19,14 +19,15 @@ function divide(a, b) {
 function operate(op, a, b) {
 	let solve = op(a, b);
 	screen.innerText = solve;
-	values = [solve]
-	value = "";
+	value1 = solve;
+	value2 = "";
+	operator = false;
 }
 
 function populate(event) {
 	if (event.target.classList.contains("operator")) {
-		values.push(Number(value));
-		value = "";
+		value2 = value1;
+		value1 = "";
 		operator = event.target.innerText;
 		screen.innerText += event.target.innerText;
 		}
@@ -34,30 +35,31 @@ function populate(event) {
 	if (event.target.classList.contains("displayable")) {
 		if (screen.innerText === "0" || screen.innerText === "INFINITY") {
 		screen.innerText = "";
-		value = "";
-		values = [];
+		value1 = "";
+		value2 = "";
 		}
-		value += event.target.innerText;
+		value1 += event.target.innerText;
 		screen.innerText += event.target.innerText;
 		}
 	if (event.target.className === "equals") {
-		value = Number(value);
+		value1 = Number(value1);
+		value2 = Number(value2);
 		if (operator === "/") {
-			operate(divide, values[0], value);
+			operate(divide, value2, value1);
 		}
 		if (operator === "+") {
-			operate(add, values[0], value);
+			operate(add, value2, value1);
 		}
 		if (operator === "-") {
-			operate(subtract, values[0], value);
+			operate(subtract, value2, value1);
 		}
 		if (operator === "*") {
-			operate(multiply, values[0], value);
+			operate(multiply, value2, value1);
 		}
 	}
 	if (event.target.className === "clear") {
-		value = "";
-		values = [];
+		value1 = "";
+		value2 = "";
 		screen.innerText = 0;
 	}
 }
@@ -65,7 +67,7 @@ function populate(event) {
 
 
 let operator = false;
-let value = "";
-let values = [];
+let value1 = "";
+let value2 = "";
 screen = document.getElementsByClassName("screen-content")[0];
 document.body.addEventListener("click", populate);
