@@ -18,10 +18,12 @@ function divide(a, b) {
 
 function operate(op, a, b) {
 	let solve = op(a, b);
-	screen.innerText = solve;
+	toString(solve).slice(-1) === "0" ? screen.innerText = solve : screen.innerText = solve.toFixed(5);
+	
 	value1 = solve;
 	value2 = "";
 	operator = false;
+	decimal = false;
 }
 
 function isEquals() {
@@ -48,18 +50,27 @@ function isOperator(target) {
 		operator = target.innerText;
 		screen.innerText += operator;
 	}
+	decimal = false;
 	value2 = value1;
 	value1 = "";
 }
 
 function isNum(target) {
-	if (screen.innerText === "0" || screen.innerText === "INFINITY") {
+	if (screen.innerText === "0" || screen.innerText === "INFINITY" && value1 !== "0") {
 	screen.innerText = ""; // Set to empty before you add number
 	value1 = "";
 	value2 = "";
 	}
 	value1 += target.innerText;
 	screen.innerText += target.innerText;
+}
+
+function isDecimal() {
+	if (!decimal && value1 !== "") {
+		decimal = true;
+		value1 += '.';
+		screen.innerText += '.';
+	}
 }
 
 
@@ -76,10 +87,13 @@ function input(event) {
 		screen.innerText = 0;
 	} else if (target.className === "equals") {
 		isEquals()
+	} else if (target.className === "decimal") {
+		isDecimal()
 	}
 }
 
 let operator = false;
+let decimal = false;
 let value1 = "";
 let value2 = "";
 screen = document.getElementsByClassName("screen-content")[0];
