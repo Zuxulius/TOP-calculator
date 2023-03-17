@@ -12,19 +12,20 @@ function multiply(a, b) {
 
 function divide(a, b) {
 	if (b === 0) {
-	return 'INFINITY'
+		return 'INFINITY'
 	} else return a / b
 }
 
 function operate(op, a, b) {
 	let solve = op(a, b);
-	toString(solve).slice(-1) === "0" ? screen.innerText = solve : screen.innerText = solve.toFixed(5);
-	
+	screen.innerText = solve;
 	value1 = solve;
 	value2 = "";
 	operator = false;
 	decimal = false;
+	if (solve === "INFINITY") isClear()
 }
+
 
 function isEquals() {
 	value1 = Number(value1);
@@ -56,10 +57,10 @@ function isOperator(target) {
 }
 
 function isNum(target) {
-	if (screen.innerText === "0" || screen.innerText === "INFINITY" && value1 !== "0") {
-	screen.innerText = ""; // Set to empty before you add number
-	value1 = "";
-	value2 = "";
+	if ((screen.innerText === "0" || screen.innerText === "INFINITY") && value1 !== "0") {
+		screen.innerText = ""; // Set to empty before you add number
+		value1 = "";
+		value2 = "";
 	}
 	value1 += target.innerText;
 	screen.innerText += target.innerText;
@@ -70,7 +71,15 @@ function isDecimal() {
 		decimal = true;
 		value1 += '.';
 		screen.innerText += '.';
-	}
+	} 
+}
+
+function isClear() {
+	operator = false;
+	decimal = false;
+	value1 === "INFINITY" ? screen.innerText = "INFINITY" : screen.innerText = 0;
+	value1 = "";
+	value2 = "";
 }
 
 
@@ -81,10 +90,7 @@ function input(event) {
 	} else if (target.className === "operator") {
 		isOperator(target)
 	} else if (target.className === "clear") {
-		operator = false;
-		value1 = "";
-		value2 = "";
-		screen.innerText = 0;
+		isClear()
 	} else if (target.className === "equals") {
 		isEquals()
 	} else if (target.className === "decimal") {
