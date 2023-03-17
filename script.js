@@ -30,23 +30,26 @@ function isEquals() {
 
 	if (operator === "/") {
 		operate(divide, value2, value1);
-	}
-	if (operator === "+") {
+	} else if (operator === "+") {
 		operate(add, value2, value1);
-	}
-	if (operator === "-") {
+	} else if (operator === "-") {
 		operate(subtract, value2, value1);
-	}
-	if (operator === "*") {
+	} else if (operator === "*") {
 		operate(multiply, value2, value1);
 	}
 }
 
 function isOperator(target) {
+	if (operator) {
+		isEquals()
+		operator = target.innerText;
+		screen.innerText += operator;
+	} else {
+		operator = target.innerText;
+		screen.innerText += operator;
+	}
 	value2 = value1;
 	value1 = "";
-	operator = target.innerText;
-	screen.innerText += target.innerText;
 }
 
 function isNum(target) {
