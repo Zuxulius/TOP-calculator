@@ -18,7 +18,7 @@ function divide(a, b) {
 
 function operate(op, a, b) {
 	let solve = op(a, b);
-	screen.innerText = solve;
+	solve % 1 === 0 ? screen.innerText = solve : screen.innerText = solve.toFixed(5);
 	value1 = solve;
 	value2 = "";
 	operator = false;
