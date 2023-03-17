@@ -70,6 +70,7 @@ function input(event) {
 	} else if (target.className === "operator") {
 		isOperator(target)
 	} else if (target.className === "clear") {
+		operator = false;
 		value1 = "";
 		value2 = "";
 		screen.innerText = 0;
@@ -77,7 +78,6 @@ function input(event) {
 		isEquals()
 	}
 }
-
 
 let operator = false;
 let value1 = "";
