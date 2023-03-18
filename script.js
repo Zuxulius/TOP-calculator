@@ -86,6 +86,13 @@ function isClear() {
 	value2 = "";
 }
 
+function isUndo() {
+	if (value1 !== "") {
+		value1 = value1.slice(0, -1);
+		screen.innerText = screen.innerText.slice(0, -1);
+	}
+}
+
 
 function input(event) {
 	let target = event.target;
@@ -99,6 +106,8 @@ function input(event) {
 		isEquals()
 	} else if (target.className === "decimal") {
 		isDecimal()
+	} else if (target.className === "backspace") {
+		isUndo()
 	}
 }
 
