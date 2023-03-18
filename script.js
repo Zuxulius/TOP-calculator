@@ -18,12 +18,15 @@ function divide(a, b) {
 
 function operate(op, a, b) {
 	let solve = op(a, b);
-	solve % 1 === 0 ? screen.innerText = solve : screen.innerText = solve.toFixed(5);
 	value1 = solve;
 	value2 = "";
 	operator = false;
 	decimal = false;
-	if (solve === "INFINITY") isClear()
+	if (solve % 1 === 0) screen.innerText = solve;
+	else if (solve === "INFINITY") {
+		screen.innerText = solve;
+		isClear()
+	} else screen.innerText = solve.toFixed(5);
 }
 
 
@@ -43,6 +46,7 @@ function isEquals() {
 }
 
 function isOperator(target) {
+	if (screen.innerText === "INFINITY") screen.innerText = "0";
 	if (operator) {
 		isEquals()
 		operator = target.innerText;
