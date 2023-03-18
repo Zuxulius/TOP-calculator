@@ -19,7 +19,7 @@ body {
 	width: 300px;
 	background-color: lightgrey;
 	padding: 1%;
-	border: 1px solid black;
+	border: 1.5px solid black;
 	border-radius: 10px;
 }
 
@@ -50,6 +50,7 @@ button {
 	height: 90%;
 	margin: 1%;
 	background-color: #D0B8A8;
+	border: 1.5px solid black;
 	border-radius: 10%;
 }
 

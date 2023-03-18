@@ -49,10 +49,10 @@ function isOperator(target) {
 	if (screen.innerText === "INFINITY") screen.innerText = "0";
 	if (operator) {
 		isEquals()
-		operator = target.innerText;
+		operator = target;
 		screen.innerText += operator;
 	} else {
-		operator = target.innerText;
+		operator = target;
 		screen.innerText += operator;
 	}
 	decimal = false;
@@ -66,8 +66,8 @@ function isNum(target) {
 		value1 = "";
 		value2 = "";
 	}
-	value1 += target.innerText;
-	screen.innerText += target.innerText;
+	value1 += target;
+	screen.innerText += target;
 }
 
 function isDecimal() {
@@ -95,18 +95,30 @@ function isUndo() {
 
 
 function input(event) {
-	let target = event.target;
-	if (target.className === "number") {
+	let target;
+	if (event.type === "click") {
+		target = event.target;
+	} else if (event.type === "keydown") {
+		target = event.key;
+	}
+
+	if (/\d/.test(event.key)) {
+		isNum(target)
+	} else if (/[*\/\+\-]/.test(event.key)) {
+		isOperator(target)
+	} else if (target.className === "number") {
+		target = target.innerText;
 		isNum(target)
 	} else if (target.className === "operator") {
+		target = target.innerText;
 		isOperator(target)
-	} else if (target.className === "clear") {
+	} else if (target.className === "clear" || target === "C") {
 		isClear()
-	} else if (target.className === "equals") {
+	} else if (target.className === "equals" || target === "=") {
 		isEquals()
-	} else if (target.className === "decimal") {
+	} else if (target.className === "decimal" || target === ".") {
 		isDecimal()
-	} else if (target.className === "backspace") {
+	} else if (target.className === "backspace" || target === "Backspace") {
 		isUndo()
 	}
 }
@@ -115,5 +127,7 @@ let operator = false;
 let decimal = false;
 let value1 = "";
 let value2 = "";
-screen = document.getElementsByClassName("screen-content")[0];
+
+const screen = document.getElementsByClassName("screen-content")[0];
 document.body.addEventListener("click", input);
+document.body.addEventListener("keydown", input);
