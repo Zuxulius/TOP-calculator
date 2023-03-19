@@ -87,6 +87,7 @@ function isClear() {
 }
 
 function isUndo() {
+	if (screen.innerText.slice(-1) !== ".") decimal = false;
 	if (value1 !== "") {
 		value1 = value1.slice(0, -1);
 		screen.innerText = screen.innerText.slice(0, -1);
